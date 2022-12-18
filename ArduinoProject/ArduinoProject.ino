@@ -1,9 +1,17 @@
+#include "Brightness.h"
+#include "Photoresistor.h"
+
+#define PIN_PHOTORES A1
+
+Brightness *photoresistor;
+
 void setup() {
-  // put your setup code here, to run once:
+  Serial.begin(9600);
+  photoresistor = new Photoresistor(PIN_PHOTORES);
 
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
+  Serial.println(photoresistor->getBrightness());
+  delay(500);
 }
