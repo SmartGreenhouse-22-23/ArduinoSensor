@@ -1,9 +1,16 @@
+#include "SoilMoistureSensor.h"
+
+#define PIN_SOILMOISTURE A0
+
+SoilMoistureSensor *soilMoistureSensor;
+
 void setup() {
-  // put your setup code here, to run once:
+  Serial.begin(9600);
+  soilMoistureSensor = new SoilMoistureSensor(PIN_SOILMOISTURE);
 
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
+  Serial.println(soilMoistureSensor->getValue());
+  delay(500);
 }
