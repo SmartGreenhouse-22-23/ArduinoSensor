@@ -1,9 +1,20 @@
+#include "TemperatureAndHumidity.h"
+#include "Environment.h"
+
+#define PIN_DHT 2
+
+Environment *tempHum;
+
 void setup() {
-  // put your setup code here, to run once:
+  Serial.begin(9600);
+  tempHum = new TemperatureAndHumidity(PIN_DHT);
 
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
+  Serial.print("Humidity:");
+  Serial.println(tempHum->getHumidity());
+  Serial.print("Temperature:");
+  Serial.println(tempHum->getTemperature());
+  delay(500);
 }
