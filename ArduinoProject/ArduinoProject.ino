@@ -2,14 +2,26 @@
 #include "WaterPomp.h"
 #include "Brightness.h"
 #include "Photoresistor.h"
+#include "Ventilation.h"
+#include "Fan.h"
 
 #define PIN_PHOTORES A1
 #define PIN_SOILMOISTURE A0
 #define PIN_WATERPOMP 2
+#define PIN_ENABLE 5
+#define PIN_DIRA 6
+#define PIN_DIRB 4
 
+Ventilation *ventilation;
 Brightness *photoresistor;
 SoilMoistureSensor *soilMoistureSensor;
 WaterPomp *waterPomp;
+
+
+void setup() {
+  Serial.begin(9600);
+  ventilation = new Fan(PIN_ENABLE, PIN_DIRA, PIN_DIRB);
+
 
 void setup() {
   Serial.begin(9600);
@@ -26,5 +38,10 @@ void loop() {
 
   Serial.println(photoresistor->getBrightness());
 
-  delay(500);
+  if (ventilation->isActive()) {
+    ventilation->deactivate();
+  } else {
+    ventilation->activate();
+  }
+  delay(2000);
 }
