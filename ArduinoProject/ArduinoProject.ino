@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include "SoilMoistureSensor.h"
 #include "WaterPomp.h"
 #include "Brightness.h"
@@ -6,6 +7,8 @@
 #include "Fan.h"
 #include "TemperatureAndHumidity.h"
 #include "Environment.h"
+#include "Light.h"
+#include "Led.h"
 
 #define PIN_PHOTORES A1
 #define PIN_SOILMOISTURE A0
@@ -14,12 +17,18 @@
 #define PIN_ENABLE 5
 #define PIN_DIRA 6
 #define PIN_DIRB 4
+#define PIN_ALARM 10
+#define PIN_LAMP 9
 
 Ventilation *ventilation;
 Brightness *photoresistor;
 SoilMoistureSensor *soilMoistureSensor;
 WaterPomp *waterPomp;
 Environment *tempHum;
+Light *alarm;
+Light *lamp;
+
+int fade = 5;
 
 
 void setup() {
@@ -29,6 +38,12 @@ void setup() {
   soilMoistureSensor = new SoilMoistureSensor(PIN_SOILMOISTURE);
   waterPomp = new WaterPomp(PIN_WATERPOMP);
   tempHum = new TemperatureAndHumidity(PIN_DHT);
+  alarm = new Led(PIN_ALARM);
+  lamp = new Led(PIN_LAMP);
+  pinMode(PIN_LAMP, OUTPUT);
+  pinMode(PIN_ALARM, OUTPUT);
+  lamp->switchOn();
+  lamp->setBrightness(0);
 }
 
 void loop() {
@@ -51,4 +66,13 @@ void loop() {
   Serial.print("Temperature:");
   Serial.println(tempHum->getTemperature());
   delay(500);
+
+  lamp->setBrightness(lamp->getBrightness() + fade);
+  if (lamp->getBrightness() <= 0 || lamp->getBrightness() >= 255){
+    fade = -fade;
+    alarm->switchOn();
+    delay(1000); 
+    alarm->switchOff();
+  }
+  delay(200);
 }
