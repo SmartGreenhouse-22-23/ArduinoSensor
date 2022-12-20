@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include "SoilMoistureSensor.h"
 #include "WaterPomp.h"
 #include "Brightness.h"
