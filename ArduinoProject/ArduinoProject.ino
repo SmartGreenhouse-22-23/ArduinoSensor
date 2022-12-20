@@ -10,8 +10,6 @@ WaterPomp *waterPomp;
 void setup() {
   Serial.begin(9600);
   soilMoistureSensor = new SoilMoistureSensor(PIN_SOILMOISTURE);
-
-void setup() {
   waterPomp = new WaterPomp(PIN_WATERPOMP);
 }
 
