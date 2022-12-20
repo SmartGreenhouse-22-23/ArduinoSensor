@@ -21,10 +21,6 @@ WaterPomp *waterPomp;
 void setup() {
   Serial.begin(9600);
   ventilation = new Fan(PIN_ENABLE, PIN_DIRA, PIN_DIRB);
-
-
-void setup() {
-  Serial.begin(9600);
   photoresistor = new Photoresistor(PIN_PHOTORES);
   soilMoistureSensor = new SoilMoistureSensor(PIN_SOILMOISTURE);
   waterPomp = new WaterPomp(PIN_WATERPOMP);
