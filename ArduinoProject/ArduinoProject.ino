@@ -1,7 +1,7 @@
 #include "TemperatureAndHumidity.h"
 #include "Environment.h"
 
-#define PIN_DHT 2
+#define PIN_DHT 3
 
 Environment *tempHum;
 
