@@ -8,6 +8,8 @@
 #include "Environment.h"
 #include "Light.h"
 #include "Led.h"
+#include "Scheduler.h"
+#include "SensingTask.h"
 
 #define PIN_PHOTORES A1
 #define PIN_SOILMOISTURE A0
@@ -19,6 +21,8 @@
 #define PIN_ALARM 10
 #define PIN_LAMP 9
 
+#define SCHEDULE_TIME 20UL
+
 Ventilation *ventilation;
 Brightness *photoresistor;
 SoilMoistureSensor *soilMoistureSensor;
@@ -28,6 +32,10 @@ Light *alarm;
 Light *lamp;
 
 int fade = 5;
+
+SensingTask *sensingTask;
+
+Scheduler scheduler;
 
 
 void setup() {
@@ -43,9 +51,20 @@ void setup() {
   pinMode(PIN_ALARM, OUTPUT);
   lamp->switchOn();
   lamp->setBrightness(0);
+
+  sensingTask = new SensingTask(photoresistor, soilMoistureSensor, tempHum);
+  sensingTask->init(1000UL * 60UL * 15UL); //15min
+
+  scheduler.init(SCHEDULE_TIME);
+
+  scheduler.addTask(sensingTask);
+  sensingTask->setActive(true);
+  Serial.println("Task added");
 }
 
 void loop() {
+  scheduler.schedule();
+ /*
   Serial.println(soilMoistureSensor->getValue());
   waterPomp->activate();
   delay(500);
@@ -74,4 +93,5 @@ void loop() {
     alarm->switchOff();
   }
   delay(200);
+  */
 }
