@@ -22,8 +22,8 @@
 #define PIN_DIRB 4
 #define PIN_ALARM 10
 #define PIN_LAMP 9
-#define PIN_RX 0
-#define PIN_TX 1
+#define PIN_RX A3
+#define PIN_TX A4
 
 #define SCHEDULE_TIME 20UL
 
