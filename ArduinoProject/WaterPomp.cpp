@@ -1,5 +1,8 @@
 #include "WaterPomp.h"
 
+/**
+ * Implementation of the class WaterPomp.
+*/
 WaterPomp::WaterPomp(int pin){
     this->pin = pin;
     this->active = false;
