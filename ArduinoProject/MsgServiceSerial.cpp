@@ -1,6 +1,10 @@
 #include "Arduino.h"
 #include "MsgServiceSerial.h"
 
+/**
+ * Implementation of the MessageServiceSerial class.
+*/
+
 String content;
 
 MsgServiceSerial MsgServiceSL;
