@@ -7,9 +7,9 @@
 #include <string.h>
 
 /* wifi network name */
-#define SSIDNAME "Mari Mi10Lite"
+#define SSIDNAME "ONEPLUS_co_aprdrr"
 /* WPA2 PSK password */
-#define PWD "12345678"
+#define PWD "rdrr6202"
 /* MQTT server */
 #define MQTT_SERVER "broker.mqtt-dashboard.com"
 

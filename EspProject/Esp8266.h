@@ -8,19 +8,18 @@
 #include <PubSubClient.h>
 
 class Esp8266: public Connection { 
-
+    char* ssidName;
+    char* pwd; 
+    WiFiClient espClient;
+    PubSubClient client;
     public:
         Esp8266(char *ssidName, char *pwd, char *mqttServer, MsgServiceArduino *msgARD);
         void connecting();
         void sendData(char* topic, String msg);
         void processIncomingMessages();
         bool isConnected(); 
-    private:
-        char* ssidName;
-        char* pwd; 
-        WiFiClient espClient;
-        PubSubClient client;
         MsgServiceArduino *msgARD;
+    private:
         void reconnect();
 };
 
