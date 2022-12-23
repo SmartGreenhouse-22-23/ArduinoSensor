@@ -13,7 +13,7 @@ public:
     void init();
     bool isMsgAvailable();
     Msg *receiveMsg();
-    bool sendMsg(const String &msg);
+    void sendMsg(const String &msg);
 
 private:
     String content;

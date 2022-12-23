@@ -13,7 +13,7 @@ void MsgServiceEsp::init()
     availableMsg = NULL;
 }
 
-bool MsgServiceEsp::sendMsg(const String &msg)
+void MsgServiceEsp::sendMsg(const String &msg)
 {
     channel->println(msg);
 }

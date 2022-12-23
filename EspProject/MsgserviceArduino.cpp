@@ -11,7 +11,7 @@ void MsgServiceArduino::init(){
   availableMsg = NULL;
 }
 
-bool MsgServiceArduino::sendMsg(Msg msg){
+void MsgServiceArduino::sendMsg(Msg msg){
   channel->println(msg.getContent());  
 }
 
