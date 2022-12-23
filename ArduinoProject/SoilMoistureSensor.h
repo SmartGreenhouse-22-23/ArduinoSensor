@@ -15,7 +15,8 @@ public:
     */
     SoilMoistureSensor(int pin);
     /**
-     * Return the value detected.
+     * Method to get the value detected.
+     * @return the value detected. 
     */
     int getValue();
 
