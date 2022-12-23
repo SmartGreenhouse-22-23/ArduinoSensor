@@ -4,6 +4,9 @@
 #include "Light.h"
 #include "Arduino.h"
 
+/**
+ * Implementation of Light representing a Led sensor
+*/
 class Led : public Light
 {
 public:
