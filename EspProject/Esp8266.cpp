@@ -31,7 +31,7 @@ void Esp8266::connecting()
         Serial.print(".");
     }
     WiFi.setSleepMode(WIFI_NONE_SLEEP);
-    Serial.println("Connected: \n local IP: " + WiFi.localIP());
+    //Serial.println("Connected: \n local IP: " + String(WiFi.localIP()));
 }
 
 void Esp8266::reconnect(){
@@ -62,7 +62,7 @@ void Esp8266::processIncomingMessages(){
   client.loop();
 }
 
-void Esp8266::sendData(char* topic, char* msg){
+void Esp8266::sendData(char* topic, String msg){
     if (WiFi.status() != WL_CONNECTED)
     {
         Serial.println("Not connecting");
@@ -70,7 +70,7 @@ void Esp8266::sendData(char* topic, char* msg){
     }
     if (WiFi.status() == WL_CONNECTED)
     {
-       client.publish(topic, msg);
+       client.publish(topic, msg.c_str());
     }
 }
 

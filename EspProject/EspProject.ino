@@ -2,14 +2,14 @@
 #include "MsgServiceSerial.h"
 #include "MsgServiceArduino.h"
 #include "Esp8266.h"
-#include <ArduinoJson.h>
+//#include <ArduinoJson.h>
 #include <stdio.h>
 #include <string.h>
 
 /* wifi network name */
-#define SSIDNAME "ONEPLUS_co_aprdrr"
+#define SSIDNAME "Mari Mi10Lite"
 /* WPA2 PSK password */
-#define PWD "rdrr6202"
+#define PWD "12345678"
 /* MQTT server */
 #define MQTT_SERVER "broker.mqtt-dashboard.com"
 
@@ -49,18 +49,14 @@ void setup()
 void loop()
 {
     conn->processIncomingMessages();
-    /*
     if (msgARD->isMsgAvailable()){
         Msg *message = msgARD->receiveMsg();
         String m = message->getContent();
 
         //invia dati con mqtt
-        conn->sendData("DATA", m);
+        conn->sendData("SGinTopic", m);
         delete message;
     }
-    */
-    conn->sendData("SGinTopic", "prova");
-    Serial.println("message sended");
     delay(500);
 }
     
