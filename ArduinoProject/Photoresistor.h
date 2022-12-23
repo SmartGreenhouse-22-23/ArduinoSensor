@@ -10,6 +10,9 @@
 #include "Brightness.h"
 #include "Arduino.h"
 
+/**
+ * Implementation of the Brightness class using a photoresistor sensor.
+*/
 class Photoresistor : public Brightness
 {
 public:
