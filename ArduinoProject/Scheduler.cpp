@@ -1,6 +1,9 @@
 #include "Scheduler.h"
 #include "Arduino.h"
 
+/**
+ * Implementation of the class Scheduler.
+*/
 void Scheduler::init(unsigned long basePeriod)
 {
     this->basePeriod = basePeriod;

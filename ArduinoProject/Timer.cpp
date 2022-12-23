@@ -7,6 +7,9 @@ ISR(TIMER1_COMPA_vect){
   timerFlag = true;
 }
 
+/**
+ * Implementation of the Timer class.
+*/
 Timer::Timer(){
   timerFlag = false;  
 }

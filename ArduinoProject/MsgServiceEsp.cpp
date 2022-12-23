@@ -1,6 +1,9 @@
 #include "Arduino.h"
 #include "MsgServiceEsp.h"
 
+/**
+ * Implementation of class MsgServiceEsp.
+*/
 MsgServiceEsp::MsgServiceEsp(int rxPin, int txPin)
 {
     channel = new SoftwareSerial(rxPin, txPin);
