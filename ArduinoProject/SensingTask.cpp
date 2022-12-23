@@ -1,6 +1,6 @@
 #include "SensingTask.h"
 
-SensingTask::SensingTask(Brightness *photoresistor, SoilMoistureSensor *soilMoistureSensor, Environment *tempHum)
+SensingTask::SensingTask(Brightness *photoresistor, SoilMoistureSensor *soilMoistureSensor, Environment *tempHum, Sender *sender)
 {
     this->photoresistor = photoresistor;
     this->soilMoistureSensor = soilMoistureSensor;
@@ -11,6 +11,8 @@ SensingTask::SensingTask(Brightness *photoresistor, SoilMoistureSensor *soilMois
     this->humidityValue = 0.0;
     this->brightnessValue = 0.0;
     this->soilMoistureValue = 0.0;
+
+    this->sender = sender;
 }
 
 
@@ -46,7 +48,6 @@ void SensingTask::tick()
       soilMoistureValue = 30.0;
  
       Serial.println(temperatureValue);
-      String msg ="Temperature: " + String(temperatureValue) + "\nHumidity: " + String(humidityValue) + "\nBrightness: " + String(brightnessValue) + "\nSoilMoisture: " + String(soilMoistureValue);
-      //TODO usare sender e sistemare
-      Serial.println(msg);
+      String msg ="{'Temperature': " + String(temperatureValue) + ",'Humidity': " + String(humidityValue) + ",'Brightness': " + String(brightnessValue) + ",'SoilMoisture': " + String(soilMoistureValue)+ "}";
+      sender->notifyMsg(msg);
 }

@@ -10,6 +10,8 @@
 #include "Led.h"
 #include "Scheduler.h"
 #include "SensingTask.h"
+#include "Sender.h"
+#include "MsgServiceEsp.h"
 
 #define PIN_PHOTORES A1
 #define PIN_SOILMOISTURE A0
@@ -20,6 +22,8 @@
 #define PIN_DIRB 4
 #define PIN_ALARM 10
 #define PIN_LAMP 9
+#define PIN_RX 0
+#define PIN_TX 1
 
 #define SCHEDULE_TIME 20UL
 
@@ -37,6 +41,8 @@ SensingTask *sensingTask;
 
 Scheduler scheduler;
 
+Sender *sender;
+MsgServiceEsp *msgServiceEsp;
 
 void setup() {
   Serial.begin(9600);
@@ -52,8 +58,12 @@ void setup() {
   lamp->switchOn();
   lamp->setBrightness(0);
 
-  sensingTask = new SensingTask(photoresistor, soilMoistureSensor, tempHum);
-  sensingTask->init(1000UL * 60UL * 15UL); //15min
+  msgServiceEsp = new MsgServiceEsp(PIN_RX, PIN_TX);
+  msgServiceEsp->init();
+  sender = new Sender(msgServiceEsp);
+
+  sensingTask = new SensingTask(photoresistor, soilMoistureSensor, tempHum, sender);
+  sensingTask->init(1000UL * 5UL); //15min -> 1000UL * 60UL * 15UL
 
   scheduler.init(SCHEDULE_TIME);
 

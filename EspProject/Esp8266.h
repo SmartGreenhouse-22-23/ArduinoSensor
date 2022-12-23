@@ -12,7 +12,7 @@ class Esp8266: public Connection {
     public:
         Esp8266(char *ssidName, char *pwd, char *mqttServer, MsgServiceArduino *msgARD);
         void connecting();
-        void sendData(char* topic, char* msg);
+        void sendData(char* topic, String msg);
         void processIncomingMessages();
         bool isConnected(); 
     private:

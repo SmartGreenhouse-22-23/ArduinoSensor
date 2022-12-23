@@ -5,7 +5,7 @@ class Connection {
 public:
   virtual void connecting();
   virtual void reconnect();
-  virtual void sendData(char* topic, char* msg);
+  virtual void sendData(char* topic, String msg);
   virtual void processIncomingMessages();
   virtual bool isConnected();    
 };
