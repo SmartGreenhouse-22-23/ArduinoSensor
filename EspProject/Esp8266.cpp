@@ -1,14 +1,8 @@
 #include "Esp8266.h"
 
 static void callback(char* topic, byte* payload, unsigned int length){
-  Serial.print("Message arrived [");
-  Serial.print(topic);
-  Serial.print("] ");
-  for (int i = 0; i < length; i++) {
-    Serial.print((char)payload[i]);
-  }
-  Serial.println();
-  //send to Arduino msgARD->sendMsg(Msg(data[i]["attribute"].as<String>() + "+" + data[i]["minValue"].as<String>() + "+" + data[i]["maxValue"].as<String>()));
+  String message = String((char*)payload);
+  //Esp8266::msgARD->send(String(topic) + ":" + message);
 }
 
 Esp8266::Esp8266(char *ssidName, char *pwd, char *mqttServer, MsgServiceArduino *msgARD):client(espClient)
