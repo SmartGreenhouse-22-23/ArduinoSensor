@@ -20,6 +20,7 @@ class Esp8266: public Connection {
         bool isConnected(); 
         MsgServiceArduino *msgARD;
     private:
+        void callback(char* topic, byte* payload, unsigned int length);
         void reconnect();
 };
 
