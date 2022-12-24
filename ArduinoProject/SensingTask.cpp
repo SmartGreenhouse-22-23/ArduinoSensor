@@ -33,10 +33,10 @@ bool SensingTask::isActive()
 
 void SensingTask::tick()
 {
-    temperatureValue = String(this->tempHum->getTemperature());
-    humidityValue = String(this->tempHum->getHumidity());
-    brightnessValue = String(this->photoresistor->getBrightness());
-    soilMoistureValue = String(this->soilMoistureSensor->getValue());
+    temperatureValue = this->tempHum->getTemperature();
+    humidityValue = this->tempHum->getHumidity();
+    brightnessValue = this->photoresistor->getBrightness();
+    soilMoistureValue = this->soilMoistureSensor->getValue();
 
     String msg ="{'Temperature': " + String(temperatureValue) + ",'Humidity': " + String(humidityValue) + ",'Brightness': " + String(brightnessValue) + ",'SoilMoisture': " + String(soilMoistureValue)+ "}";
     sender->notifyMsg(msg);
