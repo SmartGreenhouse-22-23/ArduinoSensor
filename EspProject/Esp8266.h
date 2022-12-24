@@ -1,6 +1,11 @@
 #ifndef __ESP__
 #define __ESP__
 
+#define IRRIGATION "IRRIGATION"
+#define LUMINOSITY "LUMINOSITY"
+#define TEMPERATURE "TEMPERATURE"
+#define VENTILATION "VENTILATION"
+
 #include "Arduino.h"
 #include "Connection.h"
 #include "MsgServiceArduino.h"

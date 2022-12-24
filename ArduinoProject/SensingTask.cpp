@@ -18,7 +18,6 @@ SensingTask::SensingTask(Brightness *photoresistor, SoilMoistureSensor *soilMois
 
 void SensingTask::init(unsigned long period)
 {
-    Serial.println(period);
     Task::init(period);
 }
 
@@ -34,7 +33,6 @@ bool SensingTask::isActive()
 
 void SensingTask::tick()
 {
-  Serial.println("SENSING TICK");
  /*
       temperatureValue = String(this->tempHum->getTemperature());
       humidityValue = String(this->tempHum->getHumidity());
