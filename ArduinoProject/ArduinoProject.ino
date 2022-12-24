@@ -76,40 +76,8 @@ void setup() {
 
   scheduler.addTask(sensingTask);
   scheduler.addTask(listenerTask);
-  
-  Serial.println("Task added");
 }
 
 void loop() {
   scheduler.schedule();
- /*
-  Serial.println(soilMoistureSensor->getValue());
-  waterPomp->activate();
-  delay(500);
-  waterPomp->deactivate();
-
-  Serial.println(photoresistor->getBrightness());
-
-  if (ventilation->isActive()) {
-    ventilation->deactivate();
-  } else {
-    ventilation->activate();
-  }
-  delay(2000);
-
-  Serial.print("Humidity:");
-  Serial.println(tempHum->getHumidity());
-  Serial.print("Temperature:");
-  Serial.println(tempHum->getTemperature());
-  delay(500);
-
-  lamp->setBrightness(lamp->getBrightness() + fade);
-  if (lamp->getBrightness() <= 0 || lamp->getBrightness() >= 255){
-    fade = -fade;
-    alarm->switchOn();
-    delay(1000); 
-    alarm->switchOff();
-  }
-  delay(200);
-  */
 }
