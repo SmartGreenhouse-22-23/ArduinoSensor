@@ -7,9 +7,9 @@
 #include <string.h>
 
 /* wifi network name */
-#define SSIDNAME "ONEPLUS_co_aprdrr"
+#define SSIDNAME "HNR 70"
 /* WPA2 PSK password */
-#define PWD "rdrr6202"
+#define PWD "jialijiali"
 /* MQTT server */
 #define MQTT_SERVER "broker.mqtt-dashboard.com"
 
@@ -44,6 +44,7 @@ void setup()
     conn->connecting();
 
     state = RECEIVE;
+
 }
 
 void loop()

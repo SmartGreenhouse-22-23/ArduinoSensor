@@ -1,10 +1,5 @@
 #include "Esp8266.h"
 
-static void callback(char* topic, byte* payload, unsigned int length){
-  String message = String((char*)payload);
-  //Esp8266::msgARD->send(String(topic) + ":" + message);
-}
-
 Esp8266::Esp8266(char *ssidName, char *pwd, char *mqttServer, MsgServiceArduino *msgARD):client(espClient)
 {
     this->ssidName = ssidName;
@@ -12,7 +7,12 @@ Esp8266::Esp8266(char *ssidName, char *pwd, char *mqttServer, MsgServiceArduino 
     this->msgARD = msgARD;
 
     client.setServer(mqttServer, 1883);
-    client.setCallback(callback);
+    client.setCallback(std::bind(&Esp8266::callback, this,  std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+}
+
+void Esp8266::callback(char* topic, byte* payload, unsigned int length){
+  String message = String((char*)payload);
+  this->msgARD->sendMsg(String(topic) + ":" + message);
 }
 
 void Esp8266::connecting()
@@ -38,7 +38,7 @@ void Esp8266::reconnect(){
             // Once connected, publish an announcement...
             client.publish("outTopic", "hello world");
             // ... and resubscribe
-            client.subscribe("inTopic");
+            client.subscribe("SGinTopic");
         } else {
             Serial.print("failed, rc=");
             Serial.print(client.state());
