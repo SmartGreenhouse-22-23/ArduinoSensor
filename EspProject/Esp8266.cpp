@@ -27,7 +27,6 @@ void Esp8266::connecting()
         Serial.print(".");
     }
     WiFi.setSleepMode(WIFI_NONE_SLEEP);
-    //Serial.println("Connected: \n local IP: " + String(WiFi.localIP()));
 }
 
 void Esp8266::reconnect(){

@@ -99,7 +99,6 @@ void ListenerTask::tick()
 {
     if (msgEsp->isMsgAvailable())
     {
-        // Serial.println("message available");
         Msg *message = msgEsp->receiveMsg();
         String m = message->getContent();
         int len = m.length();
@@ -109,11 +108,6 @@ void ListenerTask::tick()
         String data = strtok(msg, ":");
 
         this->handleMessage(m.substring(0, data.length()), m.substring(data.length() + 1));
-
-        // m.substring(task.length(), m.length()).toCharArray(msg, len);
-        // minValue = strtok(msg, "+");
-        // m.substring(task.length() + minValue.length()+2, m.length()).toCharArray(msg, len);
-        // maxValue = strtok(msg, "+");
 
         delete message;
     }
