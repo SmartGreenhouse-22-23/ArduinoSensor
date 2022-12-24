@@ -12,7 +12,9 @@ Esp8266::Esp8266(char *ssidName, char *pwd, char *mqttServer, MsgServiceArduino 
 
 void Esp8266::callback(char* topic, byte* payload, unsigned int length){
   String message = String((char*)payload);
-  this->msgARD->sendMsg(String(topic) + ":" + message);
+  Serial.println("Receive message " + String(topic) + ":" + message.substring(0, length) + " len: " + String(length));
+  this->msgARD->sendMsg(String(topic) + ":" + message.substring(0, length));
+  message = "";
 }
 
 void Esp8266::connecting()
@@ -35,10 +37,10 @@ void Esp8266::reconnect(){
         clientId += String(random(0xffff), HEX);
         if (client.connect(clientId.c_str())) {
             Serial.println("connected");
-            // Once connected, publish an announcement...
-            client.publish("outTopic", "hello world");
-            // ... and resubscribe
-            client.subscribe("SGinTopic");
+            client.subscribe(VENTILATION);
+            client.subscribe(IRRIGATION);
+            client.subscribe(LUMINOSITY);
+            client.subscribe(TEMPERATURE);
         } else {
             Serial.print("failed, rc=");
             Serial.print(client.state());

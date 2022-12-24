@@ -55,7 +55,7 @@ void loop()
         String m = message->getContent();
 
         //invia dati con mqtt
-        conn->sendData("SGinTopic", m);
+        // conn->sendData("SGinTopic", m);
         delete message;
     }
     delay(500);

@@ -10,6 +10,7 @@
 #include "Led.h"
 #include "Scheduler.h"
 #include "SensingTask.h"
+#include "ListenerTask.h"
 #include "Sender.h"
 #include "MsgServiceEsp.h"
 
@@ -20,7 +21,7 @@
 #define PIN_ENABLE 5
 #define PIN_DIRA 6
 #define PIN_DIRB 4
-#define PIN_ALARM 10
+#define PIN_TEM_LAMP 10
 #define PIN_LAMP 9
 #define PIN_RX A3
 #define PIN_TX A4
@@ -32,12 +33,13 @@ Brightness *photoresistor;
 SoilMoistureSensor *soilMoistureSensor;
 WaterPomp *waterPomp;
 Environment *tempHum;
-Light *alarm;
+Light *tempLamp;
 Light *lamp;
 
 int fade = 5;
 
 SensingTask *sensingTask;
+ListenerTask *listenerTask;
 
 Scheduler scheduler;
 
@@ -51,10 +53,10 @@ void setup() {
   soilMoistureSensor = new SoilMoistureSensor(PIN_SOILMOISTURE);
   waterPomp = new WaterPomp(PIN_WATERPOMP);
   tempHum = new TemperatureAndHumidity(PIN_DHT);
-  alarm = new Led(PIN_ALARM);
+  tempLamp = new Led(PIN_TEM_LAMP);
   lamp = new Led(PIN_LAMP);
   pinMode(PIN_LAMP, OUTPUT);
-  pinMode(PIN_ALARM, OUTPUT);
+  pinMode(PIN_TEM_LAMP, OUTPUT);
   lamp->switchOn();
   lamp->setBrightness(0);
 
@@ -64,11 +66,17 @@ void setup() {
 
   sensingTask = new SensingTask(photoresistor, soilMoistureSensor, tempHum, sender);
   sensingTask->init(1000UL * 5UL); //15min -> 1000UL * 60UL * 15UL
+  listenerTask = new ListenerTask(waterPomp, ventilation, tempLamp, lamp, msgServiceEsp);
+  listenerTask->init(1000UL * 3UL);
 
   scheduler.init(SCHEDULE_TIME);
 
-  scheduler.addTask(sensingTask);
   sensingTask->setActive(true);
+  listenerTask->setActive(true);
+
+  scheduler.addTask(sensingTask);
+  scheduler.addTask(listenerTask);
+  
   Serial.println("Task added");
 }
 
