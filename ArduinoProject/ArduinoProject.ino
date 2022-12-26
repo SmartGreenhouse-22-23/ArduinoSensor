@@ -19,7 +19,7 @@
 #define PIN_WATERPOMP 2
 #define PIN_DHT 3
 #define PIN_ENABLE 5
-#define PIN_DIRA 6
+#define PIN_DIRA 7
 #define PIN_DIRB 4
 #define PIN_TEM_LAMP 6
 #define PIN_LAMP 11
