@@ -14,8 +14,8 @@ Fan::Fan(int enablePin, int diraPin, int dirbPin)
 
 void Fan::activate() {
     analogWrite(this->enablePin, 255);
-    digitalWrite(this->diraPin, HIGH);
-    digitalWrite(this->dirbPin, LOW);
+    digitalWrite(this->diraPin, LOW);
+    digitalWrite(this->dirbPin, HIGH);
     this->active = true;
 }
 
