@@ -22,7 +22,7 @@
 #define PIN_DIRA 6
 #define PIN_DIRB 4
 #define PIN_TEM_LAMP 10
-#define PIN_LAMP 9
+#define PIN_LAMP 11
 #define PIN_RX A3
 #define PIN_TX A4
 
