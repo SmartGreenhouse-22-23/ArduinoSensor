@@ -46,6 +46,10 @@ Scheduler scheduler;
 Sender *sender;
 MsgServiceEsp *msgServiceEsp;
 
+/**
+ * Setup of the arduino microprocessor.
+ * Initializes and sets the initial values for sensors, task and scheduler.
+ */
 void setup() {
   Serial.begin(9600);
   ventilation = new Fan(PIN_ENABLE, PIN_DIRA, PIN_DIRB);
@@ -78,6 +82,10 @@ void setup() {
   scheduler.addTask(listenerTask);
 }
 
+/**
+ * The actively control the Arduino board. 
+ * It start the scheduler.
+ */
 void loop() {
   scheduler.schedule();
 }

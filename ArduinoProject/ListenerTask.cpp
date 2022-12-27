@@ -1,5 +1,7 @@
 #include "ListenerTask.h"
-
+/**
+ * Implementation of the ListenerTask class.
+*/
 ListenerTask::ListenerTask(WaterPomp *waterPomp, Ventilation *ventilation, Light *temLamp, Light *lamp, MsgServiceEsp *msgEsp)
 {
     this->waterPomp = waterPomp;
