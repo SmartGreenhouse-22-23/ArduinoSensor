@@ -1,6 +1,9 @@
 #include "Arduino.h"
 #include "MsgServiceArduino.h"
 
+/**
+ * Implementation of the MsgServiceArduion class.
+*/
 MsgServiceArduino::MsgServiceArduino(int rxPin, int txPin){
   channel = new SoftwareSerial(rxPin, txPin);
 }

@@ -1,5 +1,8 @@
 #include "Fan.h"
 
+/**
+ * Implementtion of the Fan class.
+*/
 Fan::Fan(int enablePin, int diraPin, int dirbPin)
 {
     this->enablePin = enablePin;

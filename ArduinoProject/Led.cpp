@@ -1,5 +1,8 @@
 #include "Led.h"
 
+/**
+ * Implementation of the Led class.
+*/
 Led::Led(uint8_t pin) {
     this->on = false;
     this->brightness = 255;

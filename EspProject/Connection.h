@@ -1,6 +1,7 @@
 #ifndef __CONNECTION__
 #define __CONNECTION__
 #include "Arduino.h"
+
 class Connection {
 public:
   virtual void connecting();

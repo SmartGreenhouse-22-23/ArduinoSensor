@@ -9,7 +9,7 @@
 #include <dht_nonblocking.h>
 
 /**
- * Implementation of an Environment represented through a Temperature and Humidity DHT sensor
+ * Implementation of an Environment represented through a Temperature and Humidity DHT sensor.
  */
 class TemperatureAndHumidity : public Environment
 {

@@ -1,5 +1,8 @@
 #include "SensingTask.h"
 
+/**
+ * Implementation of the class SensingTask.
+*/
 SensingTask::SensingTask(Brightness *photoresistor, SoilMoistureSensor *soilMoistureSensor, Environment *tempHum, Sender *sender)
 {
     this->photoresistor = photoresistor;
