@@ -1,5 +1,8 @@
 #include "Esp8266.h"
 
+/**
+ * Implementation of the Esp8266 class. 
+*/
 Esp8266::Esp8266(char *ssidName, char *pwd, char *mqttServer, MsgServiceArduino *msgARD):client(espClient)
 {
     this->ssidName = ssidName;
