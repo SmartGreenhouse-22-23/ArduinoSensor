@@ -6,6 +6,12 @@
 #include <stdio.h>
 #include <string.h>
 
+/**
+ * This file represent the .ino entry point for the EspProject, it was designed to run on an ESP8266
+ * By executing this file it will be possible to load the program on the ESP and check its work.
+*/
+
+
 /* wifi network name */
 #define SSIDNAME "HNR 70"
 /* WPA2 PSK password */
