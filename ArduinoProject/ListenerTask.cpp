@@ -62,6 +62,18 @@ void ListenerTask::manageTemperatureTopic(String content)
         }
         this->ventilation->activate();
     }
+    else if (content.equals("turn-off"))
+    {
+        if (this->ventilation->isActive())
+        {
+            this->ventilation->deactivate();
+        }
+        
+        if (this->temLamp->isSwitchedOn())
+        {
+            this->temLamp->switchOff();
+        }
+    }
 }
 
 void ListenerTask::manageVentilationTopic(String content)
