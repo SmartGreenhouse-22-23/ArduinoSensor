@@ -2,7 +2,6 @@
 #include "MsgServiceSerial.h"
 #include "MsgServiceArduino.h"
 #include "Esp8266.h"
-//#include <ArduinoJson.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -13,9 +12,9 @@
 
 
 /* wifi network name */
-#define SSIDNAME "HNR 70"
+#define SSIDNAME "wifi_network_name"
 /* WPA2 PSK password */
-#define PWD "jialijiali"
+#define PWD "password"
 /* MQTT server */
 #define MQTT_SERVER "broker.mqtt-dashboard.com"
 
@@ -61,7 +60,7 @@ void loop()
         String m = message->getContent();
 
         //invia dati con mqtt
-        // conn->sendData("SGinTopic", m);
+        conn->sendData("dataSG", m);
         delete message;
     }
     delay(500);
