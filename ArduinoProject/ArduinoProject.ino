@@ -14,6 +14,11 @@
 #include "Sender.h"
 #include "MsgServiceEsp.h"
 
+/**
+ * This file represent the .ino entry point for the arduinoProject, it was designed to run on an Arduino UNO
+ * By executing this file it will be possible to load the program on the arduino and check its work.
+*/
+
 #define PIN_PHOTORES A1
 #define PIN_SOILMOISTURE A0
 #define PIN_WATERPOMP 2
