@@ -63,7 +63,7 @@ void loop()
         conn->sendData("dataSG", m);
         delete message;
     }
-    delay(500);
+    delay(1000);
 }
     
     

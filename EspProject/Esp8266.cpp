@@ -15,7 +15,6 @@ Esp8266::Esp8266(char *ssidName, char *pwd, char *mqttServer, MsgServiceArduino 
 
 void Esp8266::callback(char* topic, byte* payload, unsigned int length){
   String message = String((char*)payload);
-  Serial.println("Receive message " + String(topic) + ":" + message.substring(0, length) + " len: " + String(length));
   this->msgARD->sendMsg(String(topic) + ":" + message.substring(0, length));
   message = "";
 }

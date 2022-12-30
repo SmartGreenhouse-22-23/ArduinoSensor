@@ -74,7 +74,7 @@ void setup() {
   sender = new Sender(msgServiceEsp);
 
   sensingTask = new SensingTask(photoresistor, soilMoistureSensor, tempHum, sender);
-  sensingTask->init(1000UL * 5UL); //15min -> 1000UL * 60UL * 15UL
+  sensingTask->init(1000UL * 60UL * 15UL);
   listenerTask = new ListenerTask(waterPomp, ventilation, tempLamp, lamp, msgServiceEsp);
   listenerTask->init(1000UL * 3UL);
 

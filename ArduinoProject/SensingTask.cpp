@@ -41,6 +41,7 @@ void SensingTask::tick()
     brightnessValue = this->photoresistor->getBrightness();
     soilMoistureValue = this->soilMoistureSensor->getValue();
 
-    String msg ="{'Temperature': " + String(temperatureValue) + ",'Humidity': " + String(humidityValue) + ",'Brightness': " + String(brightnessValue) + ",'SoilMoisture': " + String(soilMoistureValue)+ "}";
+    String msg ="{'Temp': " + String(temperatureValue) + ",'Hum': " + String(humidityValue) + ",'Bright': " + String(brightnessValue) + ",'Soil': " + String(soilMoistureValue)+ "}";
     sender->notifyMsg(msg);
+    msg = "";
 }
