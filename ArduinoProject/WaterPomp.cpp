@@ -11,12 +11,12 @@ WaterPomp::WaterPomp(int pin){
 
 void WaterPomp::activate(){
     active = true;
-    digitalWrite(pin, HIGH);
+    digitalWrite(pin, LOW);
 }
 
 void WaterPomp::deactivate(){
     active = false;
-    digitalWrite(pin, LOW);
+    digitalWrite(pin, HIGH);
 }
 
 bool WaterPomp::isActivated(){
