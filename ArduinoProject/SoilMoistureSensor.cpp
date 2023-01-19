@@ -9,5 +9,5 @@ SoilMoistureSensor::SoilMoistureSensor(int pin){
 }
 
 int SoilMoistureSensor::getValue(){
-    return analogRead(pin);
+    return analogRead(pin)/100;
 }
