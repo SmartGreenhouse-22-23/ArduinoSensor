@@ -68,6 +68,7 @@ void setup() {
   pinMode(PIN_TEM_LAMP, OUTPUT);
   lamp->switchOn();
   lamp->setBrightness(0);
+  waterPomp->deactivate();
 
   msgServiceEsp = new MsgServiceEsp(PIN_RX, PIN_TX);
   msgServiceEsp->init();
