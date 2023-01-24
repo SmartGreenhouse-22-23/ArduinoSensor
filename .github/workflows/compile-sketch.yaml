@@ -41,7 +41,7 @@ jobs:
           libraries: |
             - name: "PubSubClient"
               source-url: https://github.com/knolleary/pubsubclient.git   
-    release:
+  release:
     if: github.event_name == 'push'
     needs:
       - build
