@@ -43,7 +43,7 @@ jobs:
               source-url: https://github.com/knolleary/pubsubclient.git   
   find-tag:
     needs: compile-sketch
-    if:  success() && github.ref == 'refs/heads/main'
+    if:  success() && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     outputs:
       outputTagJob: '${{ steps.relese_msg.outputs.RELESE_NAME }}' #The outuput of the job
@@ -87,7 +87,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          GITHUB_TOKEN: '${{ secrets.DEPLOYMENT_TOKEN }}'
         with:
           tag_name: '${{ needs.FindTagJob.outputs.outputTagJob }}'
           release_name: 'Release ${{ needs.FindTagJob.outputs.outputTagJob }}'
