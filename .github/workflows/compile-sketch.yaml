@@ -78,7 +78,7 @@ jobs:
           fi
   deploy:
     needs: find-tag
-    if: '${{ needs.FindTagJob.outputs.outputTagJob != '''' }}'
+    if: '${{ needs.find-tag.outputs.outputTagJob != '''' }}'
     runs-on: ubuntu-latest
     steps:
       - name: Clone Repo with Checkout
@@ -89,7 +89,7 @@ jobs:
         env:
           GITHUB_TOKEN: '${{ secrets.DEPLOYMENT_TOKEN }}'
         with:
-          tag_name: '${{ needs.FindTagJob.outputs.outputTagJob }}'
-          release_name: 'Release ${{ needs.FindTagJob.outputs.outputTagJob }}'
+          tag_name: '${{ needs.find-tag.outputs.outputTagJob }}'
+          release_name: 'Release ${{ needs.find-tag.outputs.outputTagJob }}'
           draft: falses
           prerelease: false
