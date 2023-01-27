@@ -41,40 +41,55 @@ jobs:
           libraries: |
             - name: "PubSubClient"
               source-url: https://github.com/knolleary/pubsubclient.git   
-  release:
-    if: github.event_name == 'push'
-    needs:
-      - compile-sketch
+  find-tag:
+    needs: compile-sketch
+    if:  success() && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
-    concurrency:
-      group: release
-      cancel-in-progress: false
+    outputs:
+      outputTagJob: '${{ steps.relese_msg.outputs.RELESE_NAME }}' #The outuput of the job
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
-          fetch-depth: 0
-      - name: Setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - name: Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.DEPLOYMENT_TOKEN }}
+      - name: Clone Repo with Checkout
+        uses: actions/checkout@v2
+      - name: Extract relese message if present
+        shell: bash
+        id: extract_tag_msg
+        run: >
+          echo "::set-output name=TAG_MSG::$(echo
+          "${{github.event.head_commit.message}}" | grep -o -P
+          '(?<=-TAG{).*(?=})')" #Extract tag name if present
+      - name: Fetch tag
+        shell: bash
         run: |
-          npm install
-          npm ci
-          npx semantic-release
-  success:
+          git fetch --prune --unshallow --tags #Pull all tags
+      - name: Fill tag if empty
+        id: relese_msg
+        shell: bash
+        run: |
+          if [ "${{steps.extract_tag_msg.outputs.TAG_MSG}}" != "" ] #Check if the user has specified a name for the tag
+          then #if yes use it
+              echo "::set-output name=RELESE_NAME::$(echo ${{steps.extract_tag_msg.outputs.TAG_MSG}})" 
+          else #if generate one new tag incrementing fixes number like x.y.z+1
+              val=$(git describe --tags --abbrev=0)
+              newval=$(echo ${val##*.})
+              newval=$((newval+1))
+              newval="${val%.*}.$newval"
+              echo "::set-output name=RELESE_NAME::$(echo $newval)"
+              echo $newval 
+          fi
+  deploy:
+    needs: find-tag
+    if: '${{ needs.find-tag.outputs.outputTagJob != '''' }}'
     runs-on: ubuntu-latest
-    needs:
-      - compile-sketch
-    if: >-
-      always() && (
-        contains(join(needs.*.result, ','), 'failure')
-        || !contains(join(needs.*.result, ','), 'cancelled')
-      )
     steps:
-      - name: Verify that there were no failures
-        run: ${{ !contains(join(needs.*.result, ','), 'failure') }}
+      - name: Clone Repo with Checkout
+        uses: actions/checkout@v2
+      - name: Create relese if tag commit contain a tag message
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: '${{ secrets.DEPLOYMENT_TOKEN }}'
+        with:
+          tag_name: '${{ needs.find-tag.outputs.outputTagJob }}'
+          release_name: 'Release ${{ needs.find-tag.outputs.outputTagJob }}'
+          draft: falses
+          prerelease: false
