@@ -19,6 +19,6 @@ void WaterPomp::deactivate(){
     digitalWrite(pin, HIGH);
 }
 
-bool WaterPomp::isActivated(){
+bool WaterPomp::isActive(){
     return active;
 }

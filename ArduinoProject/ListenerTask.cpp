@@ -29,11 +29,11 @@ bool ListenerTask::isActive()
 
 void ListenerTask::manageIrrigationTopic(String content)
 {
-    if (content.equals("on") && (!this->waterPomp->isActivated()))
+    if (content.equals("on") && (!this->waterPomp->isActive()))
     {
         this->waterPomp->activate();
     }
-    else if (content.equals("off") && this->waterPomp->isActivated())
+    else if (content.equals("off") && this->waterPomp->isActive())
     {
         this->waterPomp->deactivate();
     }

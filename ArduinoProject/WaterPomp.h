@@ -1,12 +1,13 @@
 #ifndef __WATERPOMP__
 #define __WATERPOMP__
 
+#include "Irrigation.h"
 #include "Arduino.h"
 
 /**
- * Declaration of the WaterPomp class.
+ * Implementation of a Irrigation class representing a WaterPomp device.
 */
-class WaterPomp
+class WaterPomp: public Irrigation
 {
 public:
     /**
@@ -26,7 +27,7 @@ public:
      * Checks if the system is active.
      * @return true if the irrigation is active false otherwise.
     */
-    bool isActivated();
+    bool isActive();
 
 private:
     int pin;

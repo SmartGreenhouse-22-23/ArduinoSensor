@@ -1,3 +1,4 @@
+#include "Irrigation.h"
 #include "SoilMoistureSensor.h"
 #include "WaterPomp.h"
 #include "Brightness.h"
@@ -36,7 +37,7 @@
 Ventilation *ventilation;
 Brightness *photoresistor;
 SoilMoistureSensor *soilMoistureSensor;
-WaterPomp *waterPomp;
+Irrigation *irrigation;
 Environment *tempHum;
 Light *tempLamp;
 Light *lamp;
@@ -60,7 +61,7 @@ void setup() {
   ventilation = new Fan(PIN_ENABLE, PIN_DIRA, PIN_DIRB);
   photoresistor = new Photoresistor(PIN_PHOTORES);
   soilMoistureSensor = new SoilMoistureSensor(PIN_SOILMOISTURE);
-  waterPomp = new WaterPomp(PIN_WATERPOMP);
+  irrigation = new WaterPomp(PIN_WATERPOMP);
   tempHum = new TemperatureAndHumidity(PIN_DHT);
   tempLamp = new Led(PIN_TEM_LAMP);
   lamp = new Led(PIN_LAMP);
@@ -68,7 +69,7 @@ void setup() {
   pinMode(PIN_TEM_LAMP, OUTPUT);
   lamp->switchOn();
   lamp->setBrightness(0);
-  waterPomp->deactivate();
+  irrigation->deactivate();
 
   msgServiceEsp = new MsgServiceEsp(PIN_RX, PIN_TX);
   msgServiceEsp->init();
@@ -76,7 +77,7 @@ void setup() {
 
   sensingTask = new SensingTask(photoresistor, soilMoistureSensor, tempHum, sender);
   sensingTask->init(1000UL * 60UL * 15UL);
-  listenerTask = new ListenerTask(waterPomp, ventilation, tempLamp, lamp, msgServiceEsp);
+  listenerTask = new ListenerTask(irrigation, ventilation, tempLamp, lamp, msgServiceEsp);
   listenerTask->init(1000UL * 3UL);
 
   scheduler.init(SCHEDULE_TIME);
