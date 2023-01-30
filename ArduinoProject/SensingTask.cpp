@@ -3,7 +3,7 @@
 /**
  * Implementation of the class SensingTask.
 */
-SensingTask::SensingTask(Brightness *photoresistor, SoilMoistureSensor *soilMoistureSensor, GreenhouseTemperature *temp, GreenhouseHumidity *hum, Sender *sender)
+SensingTask::SensingTask(Brightness *photoresistor, SoilMoistureSensor *soilMoistureSensor, Temperature *temp, Humidity *hum, Sender *sender)
 {
     this->photoresistor = photoresistor;
     this->soilMoistureSensor = soilMoistureSensor;

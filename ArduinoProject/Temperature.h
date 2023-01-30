@@ -1,21 +1,16 @@
 #ifndef __TEMPERATURE__
 #define __TEMPERATURE__
-
-#include <Arduino.h>
-#include "GreenhouseTemperature.h"
-#include "Environment.h"
-
-#include <dht_nonblocking.h>
 /**
- * Implementation of a greenhouse temperature.
+ * Representation of greenhouse temperature.
  */
-class Temperature : public GreenhouseTemperature
+class Temperature
 {
-  Environment *env;
-
 public:
-    Temperature(Environment *env); 
-    float getTemperature();
+    /**
+     * Get the actual environment temperature.
+     * @return the detected temperature.
+     */
+    virtual float getTemperature();
 };
 
 #endif

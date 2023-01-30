@@ -1,10 +1,10 @@
-#include "TemperatureAndHumidity.h"
+#include "TemperatureAndHumiditySensor.h"
 
-TemperatureAndHumidity::TemperatureAndHumidity(uint8_t pin) : dht_sensor(pin, DHT_TYPE_11)
+TemperatureAndHumiditySensor::TemperatureAndHumiditySensor(uint8_t pin) : dht_sensor(pin, DHT_TYPE_11)
 {
 }
 
-float TemperatureAndHumidity::getTemperature()
+float TemperatureAndHumiditySensor::getTemperature()
 {
     bool res;
 
@@ -16,7 +16,7 @@ float TemperatureAndHumidity::getTemperature()
     return this->temperature;
 }
 
-float TemperatureAndHumidity::getHumidity()
+float TemperatureAndHumiditySensor::getHumidity()
 {
     bool res;
     do

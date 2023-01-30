@@ -1,27 +1,21 @@
 #ifndef __TEMPHUMIDITY__
 #define __TEMPHUMIDITY__
-
-#include <Arduino.h>
-#include "Environment.h"
-
-#include <dht_nonblocking.h>
-
 /**
- * Implementation of an Environment represented through a Temperature and Humidity DHT sensor.
- */
-class TemperatureAndHumidity : public Environment
+ * Representation of a generic temperature and humidity sensor.
+*/
+class TemperatureAndHumidity
 {
-
 public:
-    TemperatureAndHumidity(uint8_t pin);
-
-    float getTemperature();
-    float getHumidity();
-
-private:
-    DHT_nonblocking dht_sensor;
-    float temperature;
-    float humidity;
+    /**
+     * Get the actual environment temperature.
+     * @return the detected temperature.
+    */
+    virtual float getTemperature();
+    /**
+     * Get the actual environment humidity.
+     * @return the detected humidity.
+     */
+    virtual float getHumidity();
 };
 
 #endif
