@@ -5,8 +5,6 @@
 #include "Photoresistor.h"
 #include "Ventilation.h"
 #include "Fan.h"
-#include "TemperatureAndHumidity.h"
-#include "Environment.h"
 #include "Light.h"
 #include "Led.h"
 #include "Scheduler.h"
@@ -14,7 +12,12 @@
 #include "ListenerTask.h"
 #include "Sender.h"
 #include "MsgServiceEsp.h"
-
+#include "GreenhouseTemperature.h"
+#include "GreenhouseHumidity.h"
+#include "Temperature.h"
+#include "Humidity.h"
+#include "Environment.h"
+#include "TemperatureAndHumidity.h"
 /**
  * This file represent the .ino entry point for the arduinoProject, it was designed to run on an Arduino UNO
  * By executing this file it will be possible to load the program on the arduino and check its work.
@@ -38,7 +41,9 @@ Ventilation *ventilation;
 Brightness *photoresistor;
 SoilMoistureSensor *soilMoistureSensor;
 Irrigation *irrigation;
-Environment *tempHum;
+Environment *env;
+GreenhouseTemperature *temp;
+GreenhouseHumidity *hum;
 Light *tempLamp;
 Light *lamp;
 
@@ -62,7 +67,9 @@ void setup() {
   photoresistor = new Photoresistor(PIN_PHOTORES);
   soilMoistureSensor = new SoilMoistureSensor(PIN_SOILMOISTURE);
   irrigation = new WaterPomp(PIN_WATERPOMP);
-  tempHum = new TemperatureAndHumidity(PIN_DHT);
+  env = new TemperatureAndHumidity(PIN_DHT);
+  temp = new Temperature(env);
+  hum = new Humidity(env);
   tempLamp = new Led(PIN_TEM_LAMP);
   lamp = new Led(PIN_LAMP);
   pinMode(PIN_LAMP, OUTPUT);
@@ -75,8 +82,8 @@ void setup() {
   msgServiceEsp->init();
   sender = new Sender(msgServiceEsp);
 
-  sensingTask = new SensingTask(photoresistor, soilMoistureSensor, tempHum, sender);
-  sensingTask->init(1000UL * 60UL * 15UL);
+  sensingTask = new SensingTask(photoresistor, soilMoistureSensor, temp, hum, sender);
+  sensingTask->init(1000UL * 10UL); // 1000UL * 60UL * 15UL
   listenerTask = new ListenerTask(irrigation, ventilation, tempLamp, lamp, msgServiceEsp);
   listenerTask->init(1000UL * 3UL);
 

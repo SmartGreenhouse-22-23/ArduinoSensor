@@ -3,11 +3,12 @@
 /**
  * Implementation of the class SensingTask.
 */
-SensingTask::SensingTask(Brightness *photoresistor, SoilMoistureSensor *soilMoistureSensor, Environment *tempHum, Sender *sender)
+SensingTask::SensingTask(Brightness *photoresistor, SoilMoistureSensor *soilMoistureSensor, GreenhouseTemperature *temp, GreenhouseHumidity *hum, Sender *sender)
 {
     this->photoresistor = photoresistor;
     this->soilMoistureSensor = soilMoistureSensor;
-    this->tempHum = tempHum;
+    this->temp = temp;
+    this->hum = hum;
     this->active = false;
     
     this->temperatureValue = 0.0;
@@ -36,12 +37,12 @@ bool SensingTask::isActive()
 
 void SensingTask::tick()
 {
-    temperatureValue = this->tempHum->getTemperature();
-    humidityValue = this->tempHum->getHumidity();
+    temperatureValue = this->temp->getTemperature();
+    humidityValue = this->hum->getHumidity();
     brightnessValue = this->photoresistor->getBrightness();
     soilMoistureValue = this->soilMoistureSensor->getValue();
 
-    String msg ="{'Temp': " + String(temperatureValue) + ",'Hum': " + String(humidityValue) + ",'Bright': " + String(brightnessValue) + ",'Soil': " + String(soilMoistureValue)+ "}";
+    String msg ="{'Temp': " + String(temperatureValue)  + ",'Hum': " + String(humidityValue)  + ",'Bright': " + String(brightnessValue) + ",'Soil': " + String(soilMoistureValue)+ "}";
     sender->notifyMsg(msg);
     msg = "";
 }

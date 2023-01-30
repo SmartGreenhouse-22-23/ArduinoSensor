@@ -4,7 +4,8 @@
 #include "Task.h"
 #include "Brightness.h"
 #include "SoilMoistureSensor.h"
-#include "Environment.h"
+#include "GreenhouseHumidity.h"
+#include "GreenhouseTemperature.h"
 #include "Sender.h"
 
 /**
@@ -14,7 +15,8 @@ class SensingTask : public Task
 {
     Brightness *photoresistor;
     SoilMoistureSensor *soilMoistureSensor;
-    Environment *tempHum;
+    GreenhouseTemperature *temp;
+    GreenhouseHumidity *hum;
     Sender *sender;
     bool active;
 
@@ -23,10 +25,10 @@ public:
      * The public constructor.
      * @param photoresistor the photoresistor that registered the brigthness.
      * @param soilMoistureSensor the sensor that registered the soil moisture.
-     * @param tempHum the DHT sensor that registered the humidity and the temperature.
+     * @param temp the DHT sensor that registered the humidity and the temperature.
      * @param sender the sender to send the data to the ESP.
     */
-    SensingTask(Brightness *photoresistor, SoilMoistureSensor *soilMoistureSensor, Environment *tempHum, Sender *sender);
+    SensingTask(Brightness *photoresistor, SoilMoistureSensor *soilMoistureSensor, GreenhouseTemperature *temp, GreenhouseHumidity *hum, Sender *sender);
     /**
      * Initialize the task.
      * @param period the period of the task to be evaluated by the Scheduler.

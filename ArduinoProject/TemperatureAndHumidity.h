@@ -1,5 +1,3 @@
-#include <dht_nonblocking.h>
-
 #ifndef __TEMPHUMIDITY__
 #define __TEMPHUMIDITY__
 
