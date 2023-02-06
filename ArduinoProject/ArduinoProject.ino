@@ -17,7 +17,7 @@
 #include "TemperatureSensor.h"
 #include "HumiditySensor.h"
 #include "TemperatureAndHumidity.h"
-#include "TemperatureAndHumiditySensor.h"
+#include "TemperatureAndHumiditySensor.h" 
 /**
  * This file represent the .ino entry point for the arduinoProject, it was designed to run on an Arduino UNO
  * By executing this file it will be possible to load the program on the arduino and check its work.
