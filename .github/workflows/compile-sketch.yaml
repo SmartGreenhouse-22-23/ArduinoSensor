@@ -92,4 +92,8 @@ jobs:
           tag_name: '${{ needs.find-tag.outputs.outputTagJob }}'
           release_name: 'Release ${{ needs.find-tag.outputs.outputTagJob }}'
           draft: falses
+<<<<<<< HEAD
           prerelease: false
+=======
+          prerelease: false
+>>>>>>> 42379355d9557fa8a24b7dc473af5dc3e3ff4ab7
